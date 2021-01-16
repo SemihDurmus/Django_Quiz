@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name="Category Name")
 
     def __str__(self):
         return self.name
@@ -18,7 +18,7 @@ class Category(models.Model):
 class Quiz(models.Model):
     title = models.CharField(max_length=50, verbose_name="Quiz Title")
     # if Category is deleted Quizzes are also deleted
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -51,7 +51,7 @@ class Question(Update):
     # If Quiz is deleted Questions are also deleted
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     title = models.CharField(max_length=500, verbose_name="question")
-    difficulty = models.IntegerField(choices=SCALE)  # default=1
+    difficulty = models.IntegerField(choices=SCALE, default=1)
     date_created = models.DateTimeField(auto_now_add=True)
     # updated = models.DateTimeField(auto_now_add=True) #We ainherit Update class instead of using models.Model as parameter
 
@@ -60,10 +60,11 @@ class Question(Update):
 
 
 class Answer(Update):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name='answer')
     answer_text = models.CharField(max_length=200)
     is_right = models.BooleanField(default=False)
     #updated = models.DateTimeField(auto_now_add=True)
 
-    def _str__(self):
+    def __str__(self):
         return self.answer_text
