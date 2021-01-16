@@ -10,6 +10,10 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"
 
+    @property
+    def quiz_count(self):
+        return self.quiz_set.count()  # _set is to reach a value of a child from parent
+
 
 class Quiz(models.Model):
     title = models.CharField(max_length=50, verbose_name="Quiz Title")
@@ -43,7 +47,7 @@ class Question(Update):
     # If Quiz is deleted Questions are also deleted
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     title = models.CharField(max_length=500, verbose_name="question")
-    difficulty = models.IntegerField(choices=SCALE)
+    difficulty = models.IntegerField(choices=SCALE)  # default=1
     date_created = models.DateTimeField(auto_now_add=True)
     # updated = models.DateTimeField(auto_now_add=True) #We ainherit Update class instead of using models.Model as parameter
 
