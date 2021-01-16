@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category
+from .models import Category, Quiz
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -9,4 +9,13 @@ class CategorySerializer(serializers.ModelSerializer):
             "id",
             "name",
             "quiz_count"
+        )
+
+
+class CategoryDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = (
+            "title",
+            "question_count"
         )
