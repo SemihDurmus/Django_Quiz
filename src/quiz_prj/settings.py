@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'nested_admin',
     'rest_framework.authtoken',
+    'dj_rest_auth',
     # My_Apps
     'quiz.apps.QuizConfig',
     'users.apps.UsersConfig',
