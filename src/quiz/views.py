@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Category, Quiz, Question
 from .serializers import CategorySerializer, CategoryDetailSerializer, QuestionSerializer
-#from .pagination import MyPagination
+# from .pagination import MyPagination (for Custom Pagination)
 
 
 class CategoryList(generics.ListAPIView):
@@ -23,8 +23,8 @@ class CategoryDetail(generics.ListAPIView):
 
 class QuizDetail(generics.ListAPIView):
     serializer_class = QuestionSerializer
-    #pagination_class = MyPagination
-    ## pagination_class = [Pa]
+    # pagination_class = MyPagination (for Custom Pagination)
+    # pagination_class = [Pa] (for Global Pagination)
 
     def get_queryset(self):
         queryset = Question.objects.all()

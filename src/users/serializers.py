@@ -6,10 +6,14 @@ from django.contrib.auth.password_validation import validate_password
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    # OVERWRITING FIELDS
     email = serializers.EmailField(required=True, validators=[
                                    UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField(write_only=True, required=True, validators=[
                                      validate_password], style={'input_type': 'password'})
+    # write_only means user can only see this field when POSTing but not GET
+    # read_only is only for GET
+    # style is for showing password as ********
     password2 = serializers.CharField(write_only=True, required=True, style={
                                       'input_type': 'password'})
 
@@ -22,7 +26,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             "password2"
         )
 
-    def validate(self, attrs):
+    def validate(self, attrs):  # attrs is not a fixed expression
         if attrs["password"] != attrs["password2"]:
             raise serializers.ValidationError(
                 {"password": "Password didn't match"}

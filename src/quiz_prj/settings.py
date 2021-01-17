@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'nested_admin',
+    'rest_framework.authtoken',
+    # My_Apps
     'quiz.apps.QuizConfig',
     'users.apps.UsersConfig',
 ]
@@ -105,8 +107,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 1
+    # (for Global Pagination)
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 1
+    'DEFAULT_AUTHENTICATION_CLASSES': [  # These are valid globally in the project
+        # 'rest_framework.authentication.BasicAuthentication', #with usrname and password
+        # 'rest_framework.authentication.SessionAuthentication', #with csrf
+        'rest_framework.authentication.TokenAuthentication',  # with Token
+    ]
 }
 
 # Internationalization
