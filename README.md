@@ -5,8 +5,8 @@
 3. `pip freeze > requirements.txt`
 4. `django-admin startproject quiz-prj` + rename folder as src
 5. Add rest_framework to seetings.py > INSTALLED_APPS
-6. Create .env + in settings.py import config from decouple + Assign `config('SECRET_KEY)` to SECRET_KEY + carry original SECRET_KEY to .env
-7. src > `python3 startapp quiz` + add `quiz.apps.QuizConfig` to seetings.py > INSTALLED_APPS
+6. Create .env + in settings.py `from decouple import config` + Assign `config('SECRET_KEY)` to SECRET_KEY + carry original SECRET_KEY to .env
+7. src > `python3 manage,py startapp quiz` + add `quiz.apps.QuizConfig` to seetings.py > INSTALLED_APPS
 8. `python3 manage.py migrate` + `python3 manage.py createsuperuser` + `python3 manage.py runserver`
 9. Add Category to models + def \_\_str__
 10. Create data tables in models as classes : Quiz, Question and Answer. Create also Update class which is an abstract class. It means it is not to be migrated to dB. The reason to create this class is that we refrai writing the same code multiple times in other classses, we inherit it instead. 
