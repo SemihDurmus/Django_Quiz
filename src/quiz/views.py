@@ -3,7 +3,7 @@ from rest_framework import generics
 from .models import Category, Quiz, Question
 from .serializers import CategorySerializer, CategoryDetailSerializer, QuestionSerializer
 # from .pagination import MyPagination (for Custom Pagination)
-from rest_framework.permissions import IsAuthenticated,  # AllowAny
+from rest_framework.permissions import IsAuthenticated  # AllowAny
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 
 
